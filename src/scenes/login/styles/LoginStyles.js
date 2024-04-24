@@ -12,25 +12,6 @@ export default StyleSheet.create({
     height: 250,
     marginBottom: 40,
   },
-  inputView: {
-    width: "80%",
-    height: 50,
-    marginBottom: 20,
-    // borderColor: "blue",
-    // borderWidth: 2,
-    justifyContent: "center",
-  },
-  textInput:{
-    color: 'white',
-    fontSize: 17,
-    flex: 1,
-    marginLeft: 20
-  },   
-  inputUnderline: {
-    borderColor: "white",
-    borderRadius: 10,
-    borderWidth: 2,
-  },
   loginBtn: {
     width: "80%",
     backgroundColor: "#fcba03",
@@ -40,5 +21,23 @@ export default StyleSheet.create({
     justifyContent: "center",
     marginTop: 40,
     marginBottom: 30,
+  },
+  verificationView: {
+    display: "flex",
+    borderWidth: "2",
+    borderRadius: "6",
+    width: "18%",
+    height: 125,
+    marginRight: 10,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  verificationTextInput: {
+    color: "#fff",
+    height: "100%",
+    fontSize: 50,
+  },
+  codeContainer: {
+    flexDirection: "row",
   },
 });
