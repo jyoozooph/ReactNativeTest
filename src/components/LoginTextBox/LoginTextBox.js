@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, TextInput } from "react-native";
 import Styles from "./LoginTextBoxStyles";
 
-export default TextBox = ({ text, isPassword = false, withPasswordMessage = false }) => (
+export default TextBox = ({ text, isPassword = false, withPasswordMessage = false, handleTextChange }) => (
   <>
     <View style={Styles.inputView}>
       <TextInput
@@ -11,6 +11,8 @@ export default TextBox = ({ text, isPassword = false, withPasswordMessage = fals
         secureTextEntry={isPassword}
         spellCheck={false}
         style={Styles.textInput}
+        textContentType="oneTimeCode"
+        onChangeText={handleTextChange}
       />
       <View style={Styles.inputUnderline} />
     </View>

@@ -2,12 +2,12 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { Amplify } from 'aws-amplify';
-import amplifyconfig from './src/amplifyconfiguration.json';
+import { Amplify } from "aws-amplify";
+import amplifyconfig from "./src/amplifyconfiguration.json";
 
-import Login from './src/scenes/login/Login';
-import Signup from './src/scenes/login/Signup';
-import VerificationCode from './src/scenes/login/VerificationCode';
+import Login from "./src/scenes/login/Login";
+import Signup from "./src/scenes/login/Signup";
+import VerificationCode from "./src/scenes/login/VerificationCode";
 
 const Stack = createNativeStackNavigator();
 Amplify.configure(amplifyconfig);
