@@ -39,5 +39,6 @@ export default StyleSheet.create({
   },
   codeContainer: {
     flexDirection: "row",
+    marginBottom: 30,
   },
 });

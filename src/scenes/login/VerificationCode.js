@@ -11,10 +11,12 @@ export default ({ navigation }) => {
     key === "Backspace" && inputRefs.current[i];
   };
 
+  const onPressResendCode = () => {};
+
   return (
     <KeyboardAvoidingView style={Styles.container}>
       <Text style={{ color: "#fff", fontSize: "30", fontWeight: "600", marginBottom: 10 }}>Verification Code</Text>
-      <Text style={{ color: "#fff", marginBottom: 30}}>Enter the 4 digit code that you recieved on your e-mail.</Text>
+      <Text style={{ color: "#fff", marginBottom: 30 }}>Enter the 4 digit code that you recieved on your e-mail.</Text>
       <View style={Styles.codeContainer}>
         {Array.from({ length: 4 }, (_, i) => (
           <CodeTextBox
@@ -26,6 +28,9 @@ export default ({ navigation }) => {
           />
         ))}
       </View>
+      <Text onPress={onPressResendCode} style={{ color: "#fcba03", fontSize: "16" }}>
+        Resend Code
+      </Text>
     </KeyboardAvoidingView>
   );
 };
@@ -36,8 +41,7 @@ const CodeTextBox = forwardRef(({ autoFocus = false, handleTextChange, handleBac
   const handleChange = (text) => {
     if (text.length === 1) {
       setContainerColour("#fcba03");
-    }
-    else {
+    } else {
       setContainerColour("#fff");
     }
   };
