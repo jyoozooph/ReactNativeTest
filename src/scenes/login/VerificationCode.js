@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, forwardRef } from "react";
-import { confirmSignUp } from "aws-amplify/auth";
+import { confirmSignUp, resendSignUpCode } from "aws-amplify/auth";
+import { Auth } from "aws-amplify";
 import {
   Text,
   View,
@@ -33,7 +34,14 @@ export default ({ navigation }) => {
     }
   };
 
-  const onPressResendCode = () => {};
+  const onPressResendCode = async () => {
+    try {
+      await resendSignUpCode({ username });
+      console.log("Code resent successfully");
+    } catch (error) {
+      console.error("Error resending code: ", error);
+    }
+  };
 
   const onPressConfirm = async () => {
     try {
@@ -56,7 +64,7 @@ export default ({ navigation }) => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <KeyboardAvoidingView onclick={Keyboard.dismiss} style={Styles.container}>
-        <Text style={{ color: "#fff", fontSize: "30", fontWeight: "600", marginBottom: 10 }}>Verification Code</Text>
+        <Text style={{ color: "#fff", fontSize: 30, fontWeight: "600", marginBottom: 10 }}>Verification Code</Text>
         <Text style={{ color: "#fff", marginBottom: 30 }}>
           Enter the 4 digit code that you recieved on your e-mail.
         </Text>
@@ -72,10 +80,10 @@ export default ({ navigation }) => {
             />
           ))}
         </View>
-        <Text onPress={onPressResendCode} style={{ color: "#fcba03", fontSize: "16" }}>
+        <Text onPress={onPressResendCode} style={{ color: "#fcba03", fontSize: 16 }}>
           Resend Code
         </Text>
-        <TouchableOpacity onPress={onPressConfirm} style={Styles.loginBtn}>
+        <TouchableOpacity disabled={isNaN(confirmationCode)} onPress={onPressConfirm} style={Styles.loginBtn}>
           <Text style={Styles.loginText}>Confirm</Text>
         </TouchableOpacity>
       </KeyboardAvoidingView>
@@ -102,7 +110,7 @@ const CodeTextBox = forwardRef(({ autoFocus = false, handleTextChange, handleBac
   };
 
   return (
-    <View style={[Styles.verificationView, { borderColor: containerColour }]}>
+    <View key={index} style={[Styles.verificationView, { borderColor: containerColour }]}>
       <TextInput
         value={value === "X" ? "" : value}
         ref={ref}

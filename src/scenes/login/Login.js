@@ -21,9 +21,23 @@ export default ({ navigation }) => {
   const [password, setPassword] = useState("");
   const onPressLogin = async () => {
     try {
-        console.log({username: username, password: password})
-      const { isSignedIn, nextStep } = await signIn({ username, password });
+      console.log({ username: username, password: password });
+      const { isSignedIn, nextStep } = await signIn({
+        username,
+        password,
+        options: {
+          authFlowType: "USER_PASSWORD_AUTH",
+        },
+      });
       console.log({ isSignedIn: isSignedIn, nextStep: nextStep });
+      switch (nextStep.signInStep) {
+        case "CONFIRM_SIGN_UP":
+          navigation.navigate("VerificationCode");
+          break;
+
+        default:
+          break;
+      }
     } catch (error) {
       console.log("error signing in", error);
     }
