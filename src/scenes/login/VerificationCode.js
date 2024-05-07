@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, forwardRef } from "react";
-import { confirmSignUp, resendSignUpCode } from "aws-amplify/auth";
+// import { confirmSignUp, resendSignUpCode } from "aws-amplify/auth";
 import { Auth } from "aws-amplify";
 import {
   Text,
@@ -36,7 +36,7 @@ export default ({ navigation }) => {
 
   const onPressResendCode = async () => {
     try {
-      await resendSignUpCode({ username });
+      await Auth.resendSignUp(username);
       console.log("Code resent successfully");
     } catch (error) {
       console.error("Error resending code: ", error);
@@ -45,7 +45,7 @@ export default ({ navigation }) => {
 
   const onPressConfirm = async () => {
     try {
-      const { isSignUpComplete, nextStep } = await confirmSignUp({
+      const { isSignUpComplete, nextStep } = await Auth.confirmSignUp({
         username,
         confirmationCode,
       });
@@ -71,6 +71,7 @@ export default ({ navigation }) => {
         <View style={Styles.codeContainer}>
           {Array.from({ length: 6 }, (_, i) => (
             <CodeTextBox
+              key={i}
               value={confirmationCode[i]}
               handleTextChange={handleTextChange}
               handleBackSpace={handleBackSpace}

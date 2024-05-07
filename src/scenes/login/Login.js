@@ -10,7 +10,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
-import { signIn } from "aws-amplify/auth";
+import { Auth } from "aws-amplify";
 import LoginTextBox from "../../components/LoginTextBox/LoginTextBox";
 import Styles from "./styles/LoginStyles";
 
@@ -22,29 +22,29 @@ export default ({ navigation }) => {
   const onPressLogin = async () => {
     try {
       console.log({ username: username, password: password });
-      const { isSignedIn, nextStep } = await signIn({
+      const User = await Auth.signIn({
         username,
         password,
-        options: {
-          authFlowType: "USER_PASSWORD_AUTH",
-        },
       });
-      console.log({ isSignedIn: isSignedIn, nextStep: nextStep });
-      switch (nextStep.signInStep) {
-        case "CONFIRM_SIGN_UP":
-          navigation.navigate("VerificationCode");
-          break;
+      console.log(user);
+      // switch (nextStep.signInStep) {
+      //   case "CONFIRM_SIGN_UP":
+      //     navigation.navigate("VerificationCode");
+      //     break;
 
-        default:
-          break;
-      }
+      //   default:
+      //     break;
+      // }
     } catch (error) {
-      console.log("error signing in", error);
+      error.name === "UserNotConfirmedException" && navigation.navigate("VerificationCode");
+      console.log("error signing in", error.name);
     }
   };
+
   const onPressSignUp = () => {
     navigation.navigate("Signup");
   };
+
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={Styles.container}>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Text, View, Image, TextInput, Platform, TouchableOpacity, KeyboardAvoidingView } from "react-native";
 import LoginTextBox from "../../components/LoginTextBox/LoginTextBox";
-import { signUp } from "aws-amplify/auth";
+import { Auth } from "aws-amplify";
 import Styles from "./styles/LoginStyles";
 
 const Logo = require("../../../assets/Unicus Logo cropped.png");
@@ -30,14 +30,12 @@ export default ({ navigation }) => {
           autoSignIn: true,
         },
       };
-      const { isSignUpComplete, userId, nextStep } = await signUp(signupInput);
-      nextStep.signUpStep === "CONFIRM_SIGN_UP" && navigation.navigate("VerificationCode");
+      const foo = await Auth.signUp(signupInput);
+      !foo.userConfirmed && navigation.navigate("VerificationCode");
+      console.log(foo);
+      // const { isSignUpComplete, userId, nextStep } = await Auth.signUp(signupInput);
+      // nextStep.signUpStep === "CONFIRM_SIGN_UP" && navigation.navigate("VerificationCode");
 
-      console.log({
-        isSignUpComplete: isSignUpComplete,
-        userId: userId,
-        nextStep: nextStep,
-      });
     } catch (error) {
       console.log("error signing up:", error);
     }

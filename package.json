@@ -15,14 +15,16 @@
     "@react-native-community/netinfo": "^11.3.1",
     "@react-navigation/native": "^6.1.17",
     "@react-navigation/native-stack": "^6.9.26",
-    "aws-amplify": "^6.0.30",
+    "amazon-cognito-identity-js": "^6.3.13",
+    "aws-amplify": "^5.3.18",
     "expo": "~50.0.14",
     "expo-status-bar": "~1.11.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-native": "0.73.6",
     "react-native-get-random-values": "^1.11.0",
-    "react-native-web": "~0.19.6"
+    "react-native-web": "~0.19.6",
+    "expo-build-properties": "~0.11.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
